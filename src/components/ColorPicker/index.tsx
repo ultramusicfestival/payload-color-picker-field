@@ -3,14 +3,13 @@
 import { useConfig, useField, useLocale, withCondition } from '@payloadcms/ui'
 import React, { useCallback, useMemo } from 'react'
 
-import type { ColorPickerFieldClientComponent } from './types.js'
+import type { ColorPickerFieldClientComponent } from './types'
 
 import './index.scss'
-import { isFieldRTL } from '../../utils/isFIeldRTL.js'
-import { mergeFieldStyles } from '../../utils/mergeFieldStyles.js'
+import { isFieldRTL } from '../../utils/isFIeldRTL'
+import { mergeFieldStyles } from '../../utils/mergeFieldStyles'
 
-// eslint-disable-next-line payload/no-jsx-import-statements
-import { ColorPickerInput } from './Input.jsx'
+import { ColorPickerInput } from './Input'
 
 const ColorPickerField: ColorPickerFieldClientComponent = (props) => {
   const {
@@ -96,4 +95,4 @@ const ColorPickerField: ColorPickerFieldClientComponent = (props) => {
   )
 }
 
-export const ColorPickerFieldComponent = withCondition(ColorPickerField)
+export const ColorPickerFieldComponent: ColorPickerFieldClientComponent = withCondition(ColorPickerField)

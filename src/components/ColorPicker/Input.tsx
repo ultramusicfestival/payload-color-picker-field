@@ -6,7 +6,7 @@ import { Button, fieldBaseClass, FieldDescription, FieldError, FieldLabel, Rende
 import React, { useState, useRef } from 'react'
 import { HexColorPicker } from 'react-colorful'
 
-import type { ColorPickerInputProps } from './types.js'
+import type { ColorPickerInputProps } from './types'
 
 import './index.scss'
 
