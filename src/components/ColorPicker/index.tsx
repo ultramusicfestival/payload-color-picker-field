@@ -1,5 +1,7 @@
 'use client'
 
+import type { ChangeEvent} from 'react';
+
 import { useConfig, useField, useLocale, withCondition } from '@payloadcms/ui'
 import React, { useCallback, useMemo } from 'react'
 
@@ -8,7 +10,6 @@ import type { ColorPickerFieldClientComponent } from './types'
 import './index.scss'
 import { isFieldRTL } from '../../utils/isFIeldRTL'
 import { mergeFieldStyles } from '../../utils/mergeFieldStyles'
-
 import { ColorPickerInput } from './Input'
 
 const ColorPickerField: ColorPickerFieldClientComponent = (props) => {
@@ -65,7 +66,7 @@ const ColorPickerField: ColorPickerFieldClientComponent = (props) => {
 
   const styles = useMemo(() => mergeFieldStyles(field), [field])
 
-  const handleChange = useCallback((e: any) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value !== value) {
       setValue(e.target.value);
     }
