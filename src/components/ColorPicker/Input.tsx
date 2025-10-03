@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react'
 
 import { getTranslation } from '@payloadcms/translations'
 import { Button, fieldBaseClass, FieldDescription, FieldError, FieldLabel, RenderCustomComponent, useTranslation } from '@payloadcms/ui'
-import React, { useState, useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 
 import type { ColorPickerInputProps } from './types'
@@ -40,7 +40,7 @@ export const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
   const [fieldIsFocused, setFieldIsFocused] = useState(false)
   const lastValueRef = useRef(value)
 
-  const { i18n, t } = useTranslation()
+  const { i18n} = useTranslation()
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     if (!evt.target.value.startsWith('#')) {
@@ -51,7 +51,7 @@ export const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
 
     if (lastValueRef.current !== evt.target.value) {
       lastValueRef.current = evt.target.value
-      onChange?.(evt as any)
+      onChange?.(evt)
     }
   }
 
@@ -88,6 +88,7 @@ export const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
             }
           }}
           onFocus={() => setFieldIsFocused(true)}
+          role="group"
         >
           {!rtl && (
             <div
@@ -98,6 +99,7 @@ export const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
             />
           )}
           <input
+            aria-label={typeof label === 'string' ? label : 'Color picker'}
             data-rtl={rtl}
             disabled={readOnly}
             id={`field-${path.replace(/\./g, '__')}`}
@@ -119,7 +121,7 @@ export const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
           )}
           <div
             className={`
-            ${baseClass}__color-picker-modal 
+            ${baseClass}__color-picker-modal
             ${rtl ? `${baseClass}__color-picker-modal--rtl` : ''}
             ${fieldIsFocused ? `${baseClass}__color-picker-modal--focused` : ''}
           `}
@@ -138,7 +140,7 @@ export const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
                             name: path,
                             value: color,
                           },
-                        } as any)
+                        } as ChangeEvent<HTMLInputElement>)
                       }
                     }}
                   >
@@ -161,7 +163,7 @@ export const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
                       name: path,
                       value: v,
                     },
-                  } as any)
+                  } as ChangeEvent<HTMLInputElement>)
                 }
               }}
             />

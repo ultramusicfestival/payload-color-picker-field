@@ -1,60 +1,50 @@
+// @ts-check
+
 import payloadEsLintConfig from '@payloadcms/eslint-config'
-import payloadPlugin from '@payloadcms/eslint-plugin'
 
 export const defaultESLintIgnores = [
   '**/.temp',
   '**/.*',
   '**/.git',
+  '**/.hg',
+  '**/.pnp.*',
+  '**/.svn',
+  '**/playwright.config.ts',
+  '**/vitest.config.js',
   '**/tsconfig.tsbuildinfo',
   '**/README.md',
   '**/eslint.config.js',
+  '**/payload-types.ts',
   '**/dist/',
+  '**/.yarn/',
+  '**/build/',
   '**/node_modules/',
-]
-
-/** @typedef {import('eslint').Linter.Config} Config */
-
-export const rootParserOptions = {
-  sourceType: 'module',
-  ecmaVersion: 'latest',
-  projectService: {
-    maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 40,
-    allowDefaultProject: ['scripts/*.ts', '*.js', '*.mjs', '*.d.ts'],
-  },
-}
-
-/** @type {Config[]} */
-export const rootEslintConfig = [
-  ...payloadEsLintConfig,
-  {
-    ignores: [
-      ...defaultESLintIgnores,
-    ],
-  },
-  {
-    plugins: {
-      payload: payloadPlugin,
-    },
-    rules: {
-      'payload/no-jsx-import-statements': 'warn',
-      'payload/no-relative-monorepo-imports': 'error',
-      'payload/no-imports-from-exports-dir': 'error',
-      'payload/no-imports-from-self': 'error',
-      'payload/proper-payload-logger-usage': 'error',
-    },
-  },
+  '**/temp/',
 ]
 
 export default [
-  ...rootEslintConfig,
+  ...payloadEsLintConfig,
+  {
+    ignores: defaultESLintIgnores,
+  },
+  {
+    rules: {
+      'no-restricted-exports': 'off',
+      'perfectionist/sort-named-imports': 'warn',
+      'perfectionist/sort-imports': 'warn',
+    },
+  },
   {
     languageOptions: {
       parserOptions: {
-        ...rootParserOptions,
-        projectService: true,
+        sourceType: 'module',
+        ecmaVersion: 'latest',
+        projectService: {
+          maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 40,
+          allowDefaultProject: ['scripts/*.ts', '*.js', '*.mjs', '*.spec.ts', '*.d.ts'],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },
   },
-
 ]
