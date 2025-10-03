@@ -19,7 +19,7 @@ export const colorPickerField = (
           clientProps: {
             colors
           },
-          path: '@innovixx/payload-color-picker-field/components#ColorPickerFieldComponent',
+          path: './components#ColorPickerFieldComponent',
         },
       },
     },
