@@ -1,5 +1,7 @@
 import type { Field, TextField } from "payload"
 
+const PACKAGE_NAME = '@ultramusicfestival/payload-color-picker-field'
+
 export const colorPickerField = (
   options?: {
     colors?: string[]
@@ -19,7 +21,7 @@ export const colorPickerField = (
           clientProps: {
             colors
           },
-          path: './components#ColorPickerFieldComponent',
+          path: `${PACKAGE_NAME}/components#ColorPickerFieldComponent`,
         },
       },
     },
