@@ -78,5 +78,8 @@
   },
   "dependencies": {
     "react-colorful": "^5.6.1"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
