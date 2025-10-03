@@ -65,6 +65,12 @@ const ColorPickerField: ColorPickerFieldClientComponent = (props) => {
 
   const styles = useMemo(() => mergeFieldStyles(field), [field])
 
+  const handleChange = useCallback((e: any) => {
+    if (e.target.value !== value) {
+      setValue(e.target.value);
+    }
+  }, [value, setValue])
+
   return (
     <ColorPickerInput
       AfterInput={AfterInput}
@@ -78,11 +84,7 @@ const ColorPickerField: ColorPickerFieldClientComponent = (props) => {
       Label={Label}
       label={label}
       localized={localized}
-      onChange={(e) => {
-        if (e.target.value !== value) {
-          setValue(e.target.value);
-        }
-      }}
+      onChange={handleChange}
       path={path}
       placeholder={placeholder}
       readOnly={readOnly}
